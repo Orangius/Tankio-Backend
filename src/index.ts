@@ -57,7 +57,7 @@ wss.on("connection", (ws: WebSocket, request) => {
   const extWs = ws as ExtWebSocket;
   console.log("A new client connected");
 
-  console.log("THis is the number of clients: ", wss.clients.size);
+  console.log("This is the number of clients: ", wss.clients.size);
   // get the parameters from the request object
   const { searchParams } = new URL(
     request.url!,
@@ -91,7 +91,7 @@ wss.on("connection", (ws: WebSocket, request) => {
     console.log("message object: ", messageObject);
 
     if (messageObject.type == "checkIfOnline") {
-      console.log("Check if online message");
+     
       checkOnlineStatus(messageObject, extWs);
     } else if (messageObject.type == "updateTankLevel") {
       //update the database, and write the cureent tank water level
@@ -103,11 +103,11 @@ wss.on("connection", (ws: WebSocket, request) => {
           extWs.id === messageObject.receiverID && extWs.type === "dashboard"
         );
       });
-      console.log(messageObject);
+    
       //console.log("Command goes to: ", receipient);
       receipient?.send(JSON.stringify(messageObject));
     } else if (messageObject.type == "comm") {
-      console.log("Command message");
+     
       let receipient = Array.from(wss.clients).find((client: WebSocket) => {
         const extWs = client as ExtWebSocket;
         return (
@@ -158,7 +158,7 @@ function checkOnlineStatus(message: messageType, client: WebSocket) {
     return extWs.id === message.receiverID && extWs.type === "hardware";
   });
   if (receipient) {
-    console.log("Found a recipient");
+  
     const response = {
       type: "checkIfOnline",
       message: "online",
