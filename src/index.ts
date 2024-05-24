@@ -73,7 +73,7 @@ wss.on("connection", (ws: WebSocket, request) => {
 
   // when a pong is received, set the "isAlive" of the client to true
   extWs.on("pong", () => {
-    console.log("Pong received");
+
     extWs.isAlive = true;
   });
 
@@ -88,7 +88,7 @@ wss.on("connection", (ws: WebSocket, request) => {
   extWs.on("message", (message) => {
     // const mes = message.toJSON()
     const messageObject: messageType = JSON.parse(message.toString());
-    console.log("message object: ", messageObject);
+
 
     if (messageObject.type == "checkIfOnline") {
      
@@ -167,7 +167,6 @@ function checkOnlineStatus(message: messageType, client: WebSocket) {
     };
     client.send(JSON.stringify(response));
   } else {
-    console.log("Found no recipient");
     const response = {
       type: "checkIfOnline",
       message: "offline",
