@@ -109,6 +109,6 @@
       "@components/*": ["./src/components/*"]
     }
   },
-  "include": ["**/*.ts", "types/ws.d.ts"],
+  "include": ["**/*.ts", "./types/message-types.d.ts", "./types/ws.d.ts"],
   "exclude": ["node_modules"]
 }
